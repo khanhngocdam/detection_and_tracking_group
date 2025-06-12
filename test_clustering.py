@@ -25,9 +25,9 @@ from deep_sort_pytorch.utils.parser import get_config
 
 # Cấu hình Detectron2 với Mask R-CNN
 cfg = get_cfg()
-cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
+cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # ngưỡng confidence
-cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")
+cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
 
 predictor = DefaultPredictor(cfg)
 metadata = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
