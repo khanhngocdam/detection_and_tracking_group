@@ -10,7 +10,6 @@ from detectron2 import model_zoo
 from detectron2.engine import DefaultPredictor
 from detectron2.config import get_cfg
 from detectron2.data import MetadataCatalog
-from detectron2.utils.visualizer import Visualizer  # Thêm import này
 
 
 # Cấu hình Detectron2 với Mask R-CNN
@@ -70,10 +69,10 @@ while cap.isOpened():
             detection = np.array([frame_idx + 1, -1, x1, y1, w, h, score])
             all_detections.append(detection)
         
-         # Vẽ boxes lên frame
-        for box in boxes:
-            x1, y1, x2, y2 = map(int, box)
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 1)
+        #  # Vẽ boxes lên frame
+        # for box in boxes:
+        #     x1, y1, x2, y2 = map(int, box)
+        #     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 1)
 
         # Lưu frame đã xử lý vào thư mục output
         output_path = os.path.join(output_folder, f"frame_{frame_idx:05d}.jpg")

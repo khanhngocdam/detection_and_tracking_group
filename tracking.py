@@ -74,8 +74,8 @@ for frame_idx, frame_name in enumerate(frame_files):
         x, y, w, h = track.to_tlwh()
         track_id = track.track_id
         cv2.rectangle(frame, (int(x), int(y)), (int(x + w), int(y + h)), (0, 0, 255), 1)
-        cv2.putText(frame, f'ID {track_id}', (int(x), int(y) - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 1)
+        cv2.putText(frame, f'ID {track_id}', (int(x), int(y) - 5),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0, 0, 255), 1)
 
     # Hiển thị / lưu video
     out.write(frame)
