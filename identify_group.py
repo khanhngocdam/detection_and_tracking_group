@@ -18,7 +18,7 @@ def get_colors(n):
         return []
         
     colors = []
-    hue_partition = 179 // max(1, n)  # Ensure denominator is at least 1
+    hue_partition = 179 // n  
     
     for i in range(n):
         # Create color with:
