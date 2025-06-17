@@ -8,12 +8,27 @@ from deep_sort.tools import generate_detections as gdet
 from deep_sort.application_util import preprocessing
 
 from identify_group import cluster_bboxes_with_ids
+import argparse
 
 # ===== CONFIGURATION =====
-frames_dir = "./output/test_detectron2_frames"
+parser = argparse.ArgumentParser()
+parser.add_argument('--input_video', type=str, required=True, help='Path to input video file')
+parser.add_argument('--frames_dir', type=str, required=True, help='Directory containing extracted frames')
+parser.add_argument('--epsilon', type=float, default=50.0, help='DBSCAN epsilon value')
+parser.add_argument('--threshold_overlap', type=float, default=0.7, help='Overlap threshold for old/new group determination')
+args = parser.parse_args()
+
+input_video = args.input_video
+frames_dir = args.frames_dir
+epsilon = args.epsilon
+threshold_overlap = args.threshold_overlap
+
+os.makedirs(frames_dir, exist_ok=True)
+
 detection_file = os.path.join(frames_dir, "det.npy")
 reid_model_path = "./deep_sort/resources/networks/mars-small128.pb"
-output_video = "./output/tracked_output.mp4"
+video_name = os.path.splitext(os.path.basename(input_video))[0]  # "v2"
+output_video = f"./output/output_{video_name}.mp4"
 
 # ===== LOAD REID MODEL =====
 max_cosine_distance = 0.4
@@ -32,10 +47,10 @@ total_frames = len(frame_files)
 # ===== VIDEO WRITER (for saving tracking video) =====
 sample_frame = cv2.imread(os.path.join(frames_dir, frame_files[0]))
 h, w = sample_frame.shape[:2]
-video_path = './input/v3.mp4'
+
 
 # Open video
-cap = cv2.VideoCapture(video_path)
+cap = cv2.VideoCapture(input_video)
 
 # Check if video can be opened
 if not cap.isOpened():
@@ -90,7 +105,7 @@ for frame_idx, frame_name in enumerate(frame_files):
 
     if len(bboxes) >= 2:
         cluster_results, groups_status, max_group_id = cluster_bboxes_with_ids(
-            groups_status, bboxes, track_ids, max_group_id, eps=50, min_samples=2, thread_ration_overlap=0.7)
+            groups_status, bboxes, track_ids, max_group_id, eps=epsilon, min_samples=2, threshold_overlap=threshold_overlap)
 
         # Draw bbox and info for each person
         for person in cluster_results:
