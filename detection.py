@@ -5,6 +5,7 @@ setup_logger()
 import numpy as np
 import cv2
 import os
+import argparse
 
 from detectron2 import model_zoo
 from detectron2.engine import DefaultPredictor
@@ -24,10 +25,14 @@ predictor = DefaultPredictor(cfg)
 metadata = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
 
 # Thư mục chứa ảnh đầu vào và thư mục kết quả
-input_video = "./input/v3.mp4"
-output_folder = "./output/test_detectron2_frames"
-os.makedirs(output_folder, exist_ok=True)
+parser = argparse.ArgumentParser()
+parser.add_argument('--input_video', type=str, required=True, help='Path to input video file')
+parser.add_argument('--output_folder', type=str, required=True, help='Path to output folder')
+args = parser.parse_args()
 
+input_video = args.input_video
+output_folder = args.output_folder
+os.makedirs(output_folder, exist_ok=True)
 
 # Đọc video đầu vào
 cap = cv2.VideoCapture(input_video)

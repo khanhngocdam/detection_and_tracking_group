@@ -35,7 +35,7 @@ def get_colors(n):
     
     return colors
 
-def cluster_bboxes_with_ids(groups_status, bboxes, track_ids, max_group_id, eps=50, min_samples=2, thread_ration_overlap=0.5):
+def cluster_bboxes_with_ids(groups_status, bboxes, track_ids, max_group_id, eps=50, min_samples=2, threshold_overlap=0.5):
     """
     Cluster tracked objects based on their center points using DBSCAN
     
@@ -78,8 +78,8 @@ def cluster_bboxes_with_ids(groups_status, bboxes, track_ids, max_group_id, eps=
                     best_overlap = overlap
                     best_match = group_id
                     overlap_ratio = best_overlap / len(old_group_members)
-        
-            if best_match is not None and overlap_ratio >= thread_ration_overlap:
+
+            if best_match is not None and overlap_ratio >= threshold_overlap:
                 new_group_status[best_match] = cluster_members[id_cluster]
             else:
                 # Create new group if no inheritance found
