@@ -1,6 +1,8 @@
 ### 1. Create an enviroment.:
 ```
 conda create -n tracking_env python=3.8
+```
+```
 conda activate tracking_env
 ```
 
