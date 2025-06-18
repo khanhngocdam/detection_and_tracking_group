@@ -23,3 +23,5 @@ python tracking_group.py
 --frames_dir [Link to your output folder, same above output folder] 
 --epsilon [DBSCAN epsilon sush as 50, 75, 100] --threshold_overlap [threshold overlap with old group (0.5 -> 1.0)]
 ```
+### 6. You can see the results in folder output
+
