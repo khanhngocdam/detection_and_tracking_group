@@ -24,3 +24,33 @@ python tracking_group.py --input_video [Link to your video] --frames_dir [Link t
 ```
 ### 6. You can see the results in folder output
 
+## Citation / References
+```bibtex
+@inproceedings{Wojke2017simple,
+  title={Simple Online and Realtime Tracking with a Deep Association Metric},
+  author={Wojke, Nicolai and Bewley, Alex and Paulus, Dietrich},
+  booktitle={2017 IEEE International Conference on Image Processing (ICIP)},
+  year={2017},
+  pages={3645--3649},
+  organization={IEEE},
+  doi={10.1109/ICIP.2017.8296962}
+}
+
+@inproceedings{Wojke2018deep,
+  title={Deep Cosine Metric Learning for Person Re-identification},
+  author={Wojke, Nicolai and Bewley, Alex},
+  booktitle={2018 IEEE Winter Conference on Applications of Computer Vision (WACV)},
+  year={2018},
+  pages={748--756},
+  organization={IEEE},
+  doi={10.1109/WACV.2018.00087}
+}
+
+@misc{wu2019detectron2,
+  author =       {Yuxin Wu and Alexander Kirillov and Francisco Massa and
+                  Wan-Yen Lo and Ross Girshick},
+  title =        {Detectron2},
+  howpublished = {\url{https://github.com/facebookresearch/detectron2}},
+  year =         {2019}
+}
+
