@@ -7,6 +7,8 @@ conda activate tracking_env
 ### 2. Install Dependencies
 ```
 pip install -r requirements.txt
+```
+```
 pip install git+https://github.com/facebookresearch/detectron2.git@536dc9d527074e3b15df5f6677ffe1f4e104a4ab
 ```
 
@@ -18,10 +20,7 @@ python detection.py --input_video [Link to your video] --output_folder [Link to 
 ```
 ### 5. Run below cmd line to tracking people and identify groups:
 ```
-python tracking_group.py 
---input_video [Link to your video] 
---frames_dir [Link to your output folder, same above output folder] 
---epsilon [DBSCAN epsilon sush as 50, 75, 100] --threshold_overlap [threshold overlap with old group (0.5 -> 1.0)]
+python tracking_group.py --input_video [Link to your video] --frames_dir [Link to your output folder, same above output folder] --epsilon [DBSCAN epsilon sush as 50, 75, 100] --threshold_overlap [threshold overlap with old group (0.5 -> 1.0)]
 ```
 ### 6. You can see the results in folder output
 
