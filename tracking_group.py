@@ -28,7 +28,11 @@ os.makedirs(frames_dir, exist_ok=True)
 detection_file = os.path.join(frames_dir, "det.npy")
 reid_model_path = "./deep_sort/resources/networks/mars-small128.pb"
 video_name = os.path.splitext(os.path.basename(input_video))[0]  # "v2"
-output_video = f"./output/output_{video_name}.mp4"
+
+output_dir = "./output"
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+output_video = f"{output_dir}/output_{video_name}.mp4"
 
 # ===== LOAD REID MODEL =====
 max_cosine_distance = 0.4
@@ -136,8 +140,6 @@ for frame_idx, frame_name in enumerate(frame_files):
                         (center_x - 10, center_y - 10),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         0.3, color, 1)
-
-            cv2.imwrite(f'output/test/frame_{frame_idx:04d}.jpg', frame)
 
     # Display / save video
     out.write(frame)
