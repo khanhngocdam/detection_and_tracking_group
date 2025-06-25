@@ -140,7 +140,6 @@ for frame_idx, frame_name in enumerate(frame_files):
                         (center_x - 10, center_y - 10),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         0.3, color, 1)
-
     # Display / save video
     out.write(frame)
     print(f"Tracking frame {current_frame_id}/{total_frames}", end='\r')
