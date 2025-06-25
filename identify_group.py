@@ -50,8 +50,8 @@ def cluster_bboxes_with_ids(groups_status, bboxes, track_ids, max_group_id, eps=
     """
     if not bboxes or not track_ids or len(bboxes) != len(track_ids):
         raise ValueError("bboxes and track_ids must have same length and not be empty")
-
-    centers = [(x + w / 2, y + h / 2) for (x, y, w, h) in bboxes]
+    
+    centers = [(x + w / 2, y + h / 2, (2 * 3.14 * 180) / (w + h * 360) * 1000 + 3) for (x, y, w, h) in bboxes]
     # Convert to numpy array for DBSCAN
     X = np.array(centers)
 
