@@ -56,3 +56,14 @@ python tracking_group.py --input_video [Link to your video] --frames_dir [Link t
   year =         {2019}
 }
 
+@article{article,
+author = {Khan, Muiz and Paul, Pias and Rashid, Mahmudur and Hossain, Mainul and Ahad, Md Atiqur Rahman},
+year = {2020},
+month = {10},
+pages = {507 - 517},
+title = {An AI-Based Visual Aid With Integrated Reading Assistant for the Completely Blind},
+volume = {50},
+journal = {IEEE Transactions on Human-Machine Systems},
+doi = {10.1109/THMS.2020.3027534}
+}
+
