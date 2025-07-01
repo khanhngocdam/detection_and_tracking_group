@@ -1,4 +1,7 @@
 ## Report for all in progress
+## Pipeline
+Object Detection --> Pose Estimation (optional) --> Object Tracking --> Clustering to identify subgroups
+
 ## Quick install:
 ### 1. Create an enviroment.:
 ```
