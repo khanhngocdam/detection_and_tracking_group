@@ -106,7 +106,6 @@ for frame_idx, frame_name in enumerate(frame_files):
             continue
 
         bbox = track.to_tlwh()
-
         bboxes.append(bbox)
         track_ids.append(track.track_id)
 
