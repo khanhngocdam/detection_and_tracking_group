@@ -19,7 +19,7 @@ import time
 cfg = get_cfg()
 # cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))
 cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml"))
-cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # ngưỡng confidence
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # confidence threshold
 # cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml")
 
@@ -43,17 +43,15 @@ input_video = args.input_video
 output_folder = args.output_folder
 os.makedirs(output_folder, exist_ok=True)
 
-# Đọc video đầu vào
+# Read input video
 cap = cv2.VideoCapture(input_video)
 frame_idx = 0
-
 total_infer_time = 0
 num_frames = 0
 
 if not cap.isOpened():
     print("Error: Cannot open video")
     exit()
-
 # Create a list to store all detections
 all_detections = []
 while cap.isOpened():
