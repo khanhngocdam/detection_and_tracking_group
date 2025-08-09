@@ -32,7 +32,7 @@ video_name = os.path.splitext(os.path.basename(input_video))[0]  # "v2"
 output_dir = "./output"
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
-output_video = f"{output_dir}/output_{video_name}.mp4"
+output_video = f"{output_dir}/output_{video_name}_x101.mp4"
 
 # ===== LOAD REID MODEL =====
 max_cosine_distance = 0.4
@@ -70,6 +70,9 @@ out = cv2.VideoWriter(output_video, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h)
 # ===== TRACKING WITH DEEPSORT =====
 groups_status = {}  # Store group status
 max_group_id = -1   # Variable to track the highest group ID
+
+import time
+start_time = time.time()  # Bắt đầu đo thời gian xử lý frame
 
 for frame_idx, frame_name in enumerate(frame_files):
     frame = cv2.imread(os.path.join(frames_dir, frame_name))
@@ -145,5 +148,9 @@ for frame_idx, frame_name in enumerate(frame_files):
     out.write(frame)
     print(f"Tracking frame {current_frame_id}/{total_frames}", end='\r')
 
+end_time = time.time()  # Kết thúc đo thời gian xử lý frame
+
 out.release()
 print("\n🎉 Tracking completed. Video saved at:", output_video)
+print(f"Processed {total_frames} frames in {end_time - start_time:.2f} seconds.")
+print(f"Average processing speed: {total_frames / (end_time - start_time):.2f} FPS.")

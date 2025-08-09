@@ -13,14 +13,15 @@ from detectron2.engine import DefaultPredictor
 from detectron2.config import get_cfg
 from detectron2.data import MetadataCatalog
 
+import time
 
 # Cấu hình Detectron2 với Mask R-CNN
 cfg = get_cfg()
-cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))
-# cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml"))
+# cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))
+cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml"))
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # ngưỡng confidence
-cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
-# cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml")
+# cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
+cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml")
 
 # Automatically detect if GPU is available
 if torch.cuda.is_available():
@@ -46,6 +47,9 @@ os.makedirs(output_folder, exist_ok=True)
 cap = cv2.VideoCapture(input_video)
 frame_idx = 0
 
+total_infer_time = 0
+num_frames = 0
+
 if not cap.isOpened():
     print("Error: Cannot open video")
     exit()
@@ -58,8 +62,14 @@ while cap.isOpened():
         break
         
     try:
+        start_time = time.time()  # Bắt đầu đo thời gian
+
         # Run Detectron2 on the frame
         outputs = predictor(frame)
+
+        infer_time = time.time() - start_time  # Kết thúc đo thời gian
+        total_infer_time += infer_time
+        num_frames += 1
 
         # Get instances from outputs and move to CPU
         instances = outputs["instances"].to("cpu")
@@ -101,4 +111,10 @@ det_path = os.path.join(output_folder, 'det.npy')  # rename file to match DeepSO
 np.save(det_path, all_detections)
 print(f"\nSaved detections to {det_path}")
 print(f"Shape of detections: {all_detections.shape}")
+
+if num_frames > 0:
+    avg_infer_time = total_infer_time / num_frames
+    fps = 1.0 / avg_infer_time
+    print(f"Average inference time per frame: {avg_infer_time:.4f} seconds")
+    print(f"Average FPS: {fps:.2f}")
 # Format of each line: [frame_id, track_id, bb_left, bb_top, width, height, confidence]
