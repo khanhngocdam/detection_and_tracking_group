@@ -33,7 +33,7 @@ video_name = os.path.splitext(os.path.basename(input_video))[0]  # "v2"
 output_dir = "./output"
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
-output_video = f"{output_dir}/output_{video_name}_x101.mp4"
+output_video = f"{output_dir}/output_{video_name}_threshold=80.mp4"
 
 # ===== LOAD REID MODEL =====
 max_cosine_distance = 0.4
