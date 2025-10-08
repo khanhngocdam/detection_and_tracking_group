@@ -22,7 +22,10 @@ python detection.py --input_video [Link to your video] --output_folder [Link to 
 ```
 ### 5. Run below cmd line to tracking people and identify groups:
 ```
-python tracking_group.py --input_video [Link to your video] --frames_dir [Link to your output folder, same above output folder] --epsilon [DBSCAN epsilon sush as 50, 75, 100] --threshold_overlap [threshold overlap with old group (0.5 -> 1.0)]
+Faster RCNN: python tracking_group.py --input_video [Link to your video] --frames_dir [Link to your output folder, same above output folder] --epsilon [DBSCAN epsilon sush as 50, 75, 100] --threshold_overlap [threshold overlap with old group (0.5 -> 1.0)]
+
+Yolov8n: python yolo_detection.py --input_video [Link to video mp4] --output_folder [Output folder] --epsilon [DBSCAN epsilon sush as 50, 75, 100] --threshold_overlap [threshold overlap with old group (0.5 -> 1.0)]
+
 ```
 ### 6. You can see the results in folder output
 
