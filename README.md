@@ -1,3 +1,5 @@
+## Report for all in progress
+## Quick install:
 ### 1. Create an enviroment.:
 ```
 conda create -n tracking_env python=3.8
@@ -55,5 +57,16 @@ Yolov8n: python yolo_detection.py --input_video [Link to video mp4] --output_fol
   title =        {Detectron2},
   howpublished = {\url{https://github.com/facebookresearch/detectron2}},
   year =         {2019}
+}
+
+@article{article,
+author = {Khan, Muiz and Paul, Pias and Rashid, Mahmudur and Hossain, Mainul and Ahad, Md Atiqur Rahman},
+year = {2020},
+month = {10},
+pages = {507 - 517},
+title = {An AI-Based Visual Aid With Integrated Reading Assistant for the Completely Blind},
+volume = {50},
+journal = {IEEE Transactions on Human-Machine Systems},
+doi = {10.1109/THMS.2020.3027534}
 }
 
